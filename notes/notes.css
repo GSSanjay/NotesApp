@@ -57,6 +57,10 @@
   margin-bottom: 0.5rem;
 }
 
+.btn-notes {
+  display: flex;
+}
+
 .txt-textarea textarea {
   border: 1px solid rgb(88 88 245);
   width: 100%;
@@ -73,7 +77,26 @@
     "Lucida Sans", Arial, sans-serif;
   border: none;
   /* width: 10vw; */
-  width: 100%;
+  width: 50%;
+  /* margin-left: 0.5rem; */
+  margin: auto;
+}
+
+.txt-textarea .btn-update {
+  background-color: rgb(88 88 245);
+  color: #fff;
+  height: 30px;
+  margin-left: 0.2rem;
+  padding: 0 0.5rem 0 0.5rem;
+  font-weight: bolder;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  border: none;
+  /* width: 10vw; */
+  width: 50%;
+  /* margin-left: 0.5rem; */
+  display: none;
+  margin: auto;
 }
 
 .notes {
@@ -90,6 +113,17 @@
   padding: 0.5rem;
   border: 1px solid rgb(88 88 245);
   margin: 0.5rem;
+}
+
+.note .title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note img {
+  width: 2rem;
+  height: 2.2rem;
+  padding: 0.3rem;
 }
 
 .note:hover {

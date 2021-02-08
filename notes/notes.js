@@ -1,9 +1,12 @@
 let btnAdd = document.querySelector("#btnAdd");
+let txtNote = document.querySelector("#txtNote");
+
 showNotes();
 
 //Add a new note to localStorage
-btnAdd.addEventListener("click", () => {
-    let txtNote = document.querySelector("#txtNote");
+btnAdd.addEventListener("click", addNote);
+
+function addNote() {
     console.log("Clicked..");
     console.log(txtNote.value);
     let notes = localStorage.getItem("notes");
@@ -18,7 +21,7 @@ btnAdd.addEventListener("click", () => {
     localStorage.setItem("notes", JSON.stringify(notesObj));
     txtNote.value = "";
     showNotes();
-});
+}
 
 //Function to show notes from localStorage
 function showNotes() {
@@ -34,7 +37,10 @@ function showNotes() {
     notesObj.forEach((element, index) => {
         html += `
         <article class="note">
-                <h3>Note ${index + 1}</h3>
+                <div class="title">
+                    <h3>Note ${index + 1}</h3>
+                    <img src="edit1.png" id=${index} onclick="editNote(this.id)"/>
+                </div>
                 <hr>
                 <p>${element}</p>
                 <button id=${index} class="btn-delete" onclick="deleteNote(this.id)">Delete Note</button>
@@ -82,3 +88,42 @@ txtSearch.addEventListener("input", () => {
         }
     })
 })
+
+//Function to edit a note
+function editNote(index) {
+    let notes = localStorage.getItem("notes");
+    let btnAdd = document.querySelector("#btnAdd");
+    let saveIndex = document.querySelector("#saveIndex");
+    let btnUpdate = document.querySelector("#btnUpdate");
+    saveIndex.value = index;
+    if (notes === null) {
+        notesObj = [];
+    }
+    else {
+        notesObj = JSON.parse(notes);
+    }
+
+    txtNote.value = notesObj[index];
+    btnAdd.style.display = "none";
+    btnUpdate.style.display = "block";
+
+}
+
+let btnUpdate = document.querySelector("#btnUpdate");
+btnUpdate.addEventListener("click", () => {
+    let notes = localStorage.getItem("notes");
+
+    if (notes === null) {
+        notesObj = [];
+    }
+    else {
+        notesObj = JSON.parse(notes);
+    }
+    let saveIndex = document.querySelector("#saveIndex").value;
+    notesObj[saveIndex] = txtNote.value;
+    localStorage.setItem("notes", JSON.stringify(notesObj));
+    showNotes();
+    txtNote.value = "";
+    btnAdd.style.display = "block";
+    btnUpdate.style.display = "none";
+});
